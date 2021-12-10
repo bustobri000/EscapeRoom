@@ -11,8 +11,8 @@ public class EscapeRoom {
     public static JPanel Panel;
     public static JLabel label1;
     public static JLabel descriptionBlock;
-    public static JLabel textBlock;
-    public static JButton Node1, Node2, Node3, Node4;
+    public static JTextField textBlock;
+    public static JButton Node1, Node2, Node3, Node4, textButton;
     public static JRadioButton Item1, Item2, Item3, Item4;
     public static ButtonGroup Items = new ButtonGroup();
 
@@ -20,7 +20,12 @@ public class EscapeRoom {
     public static Boolean item2 = false;
     public static Boolean item3 = false;
     public static Boolean item4 = false;
-    public static Boolean rerun = false;
+    public static int run = 1;
+
+    public static Color Back = new Color(20, 20, 20, 255);
+    public static Color Front = new Color(220, 220, 220);
+    public static Color offYellow = new Color(220, 200, 60);
+    public static Color NEO = new Color(220, 60, 160);
 
     public static void main(String[] args) {
         Window = new JFrame("Dance Darling, Dance!");
@@ -29,19 +34,32 @@ public class EscapeRoom {
         Window.setSize(750, 500);
 
         Panel = new JPanel();
+        Panel.setBackground(Back);
+
         Node1 = new JButton("Mettaton");
         Node1.setBounds(0, 0, 90, 50);
+        Node1.setBackground(Front);
         Node1.addActionListener(new Node1Listener());
+
         Node2 = new JButton("YOU");
+        Node2.setBackground(offYellow);
         Node2.setBounds(0, 50, 90, 50);
         Node2.addActionListener(new Node2Listener());
+
         Node3 = new JButton("STAGE");
+        Node3.setBackground(NEO);
         Node3.setBounds(0, 100, 90, 50);
         Node3.addActionListener(new Node3Listener());
+
         Node4 = new JButton("DOOR");
         Node4.setBounds(0, 150, 90, 50);
-        Node4.addActionListener(new Node3Listener());
+        Node4.addActionListener(new Node4Listener());
 
+        textButton = new JButton("Submit");
+        textButton.addActionListener(new textButtonListener());
+        textBlock = new JTextField(10);
+        textBlock.setBounds(100, 100, 50, 50);
+        textButton.setBounds(200, 200, 50, 50);
 
         label1 = new JLabel("Some weird dancing robot thing has taken you captive to make you a star! You must escape!");
         label1.setBounds(100, 25, 550, 35);
@@ -78,7 +96,7 @@ public class EscapeRoom {
     private static class Node1Listener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            if(!rerun){
+            if(run==1){
                 if (Item1.isSelected()){
                 label1.setText("You gave Mettaton the MICROPHONE, He starts singing.");
                 descriptionBlock.setText("Bizarrely, he is singing about CALCULATORs and YOU.");
@@ -109,6 +127,7 @@ public class EscapeRoom {
                     label1.setText("Mettaton Already has a MICROPHONE! HE IS NOW DUAL WIELDING MICs!");
                     descriptionBlock.setText("Now is your chance to flee!");
                     item1 = false;
+                    Panel.add(Node4);
                     Panel.remove(Item1);
                 }
             }
@@ -119,44 +138,36 @@ public class EscapeRoom {
     private static class Node2Listener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            if (Item1.isSelected()){
-                label1.setText("You gave YOURSELF the MICROPHONE, YOU are a silent protagonist.");
-            } else if (Item2.isSelected()){
-                if (item2){
-                label1.setText("You gave YOURSELF the DRESS, YOU are now in a dress.");
-                    item2 = false;
-                    Panel.remove(Item2);
-                } else if (!item1){
-                    label1.setText("What?");
-                }
-            } else if (Item3.isSelected()) {
-                if (item1){
-                    label1.setText("You stare at the CALCULATOR.");
-                    descriptionBlock.setText("Why would you want to use a CALCULATOR?");
-                } else {
-                label1.setText("You gave YOURSELF the CALCULATOR.");
-                descriptionBlock.setText("You shouldn't see this :)");
-                String garbage = JOptionPane.showInputDialog("Given x=(-b+-√(b^2-4ac))/2a, with an X value of 0.0124, B value of 12 and C value of 51, what is a? (round to 4 decimal places");
-                if (garbage.equals("e")){
-                    label1.setText("Why did you solve that?");
-                    descriptionBlock.setText("From within the CALCULATOR is a DRESS! YOU toss the CALCULATOR");
-                } else if (garbage.equals("")){
-                    label1.setText("YOU FAIL!");
-                    descriptionBlock.setText("You broke the CALCULATOR by inputting nothing, inside was a DRESS!");
-                } else {
-                    label1.setText("YOU FAIL!");
-                    descriptionBlock.setText("You broke the CALCULATOR by inputting garbage, inside was a DRESS!");
-                    }
-                item2 = true;
-                item3 = false;
-                Panel.remove(Item3);
-                Panel.add(Item2);
-                }
+            if (run == 3){
+            oneTimeJoke("Did you really think tou could escape so easily?");
             } else {
-                label1.setText("Do you like playing with yourself?");
-                descriptionBlock.setText("(This message is a rarer one!)");
+                if (Item1.isSelected()) {
+                    label1.setText("You gave YOURSELF the MICROPHONE, YOU are a silent protagonist.");
+                } else if (Item2.isSelected()) {
+                    if (item2) {
+                        label1.setText("You gave YOURSELF the DRESS, YOU are now in a dress.");
+                        item2 = false;
+                        Panel.remove(Item2);
+                    } else if (!item1) {
+                        label1.setText("What?");
+                    }
+                } else if (Item3.isSelected()) {
+                    if (item1) {
+                        label1.setText("You stare at the CALCULATOR.");
+                        descriptionBlock.setText("Why would you want to use a CALCULATOR?");
+                    } else {
+                        descriptionBlock.setText("Solve it idiot.");
+                        item2 = true;
+                        item3 = false;
+                        oneTimeJoke("Given x=(-b+-√(b^2-4ac))/2a, with an X value of 0.0124, B value of 12 and C value of 51, what is a? (round to 4 decimal places");
+                        Panel.remove(Item3);
+                        Panel.add(Item2);
+                    }
+                } else {
+                    label1.setText("Do you like playing with yourself?");
+                    descriptionBlock.setText("(This message is a rarer one!)");
+                }
             }
-
             Panel.updateUI();
         }
     }
@@ -164,7 +175,7 @@ public class EscapeRoom {
     private static class Node3Listener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            if (!rerun){
+            if (run==1){
             if (Item1.isSelected()){
                 descriptionBlock.setText("The audience is already loud enough!");
                 label1.setText("(Have you tried someone else?)");
@@ -177,7 +188,7 @@ public class EscapeRoom {
                     descriptionBlock.setText("The audience loves it!...");
                     label1.setText("The audience gives you a second MICROPHONE!");
                     item1 = true;
-                    rerun = true;
+                    run = 2;
                     Panel.add(Item1);
                 } else {
                     descriptionBlock.setText("The audience adores the dress, but not you.");
@@ -209,4 +220,45 @@ public class EscapeRoom {
         }
     }
 
+    public static String oneTimeJoke(String prompt){
+        Panel.add(textBlock);
+        Panel.add(textButton);
+        label1.setText(prompt);
+        return textBlock.getText();
+    }
+    private static class textButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            String garbage = oneTimeJoke("Given x=(-b+-√(b^2-4ac))/2a, with an X value of 0.0124, B value of 12 and C value of 51, what is a? (round to 4 decimal places");
+            if(garbage.equals("e")) {
+                label1.setText("Why did you solve that?");
+                descriptionBlock.setText("From within the CALCULATOR is a DRESS! YOU toss the CALCULATOR");
+            } else if(garbage.equals(""))
+
+            {
+                label1.setText("YOU FAIL!");
+                descriptionBlock.setText("You broke the CALCULATOR by inputting nothing, inside was a DRESS!");
+            } else
+
+            {
+                label1.setText("YOU FAIL!");
+                descriptionBlock.setText("You broke the CALCULATOR by inputting garbage, inside was a DRESS!");
+            }
+            Panel.remove(textBlock);
+            Panel.remove(textButton);
+            Panel.updateUI();
+        }
+    }
+        private static class Node4Listener implements ActionListener{
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                Panel.remove(Node1);
+                Panel.remove(Node3);
+                descriptionBlock.setText("The door is locked.");
+                label1.setText("...");
+                run = 3;
+
+                Panel.updateUI();
+            }
+        }
 }
