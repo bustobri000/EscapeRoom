@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
 
 
 public class EscapeRoom {
@@ -26,9 +27,10 @@ public class EscapeRoom {
     public static Color Front = new Color(220, 220, 220);
     public static Color offYellow = new Color(220, 200, 60);
     public static Color NEO = new Color(220, 60, 160);
+    public static Color NEO2 = new Color(248, 248, 192);
 
     public static void main(String[] args) {
-        Window = new JFrame("Dance Darling, Dance!");
+        Window = new JFrame("UnfunnyUndertaleJoke12.exe.jpeg.png.gif  and Knuckles deluxe edition u featuring Dante from Devil May Cry Series and Knuckles 3D U and Knuckles and Knuckles and Knuckles and Knuckles and Knuckles and Knuckles and Knuckles and Knuckles and Knuckle sand Knuckle sand Knuckles and Knuckle sand Knuckle sand Knuckles week 7 Update ft sussus amogus");
 
         Window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Window.setSize(750, 500);
@@ -52,6 +54,7 @@ public class EscapeRoom {
         Node3.addActionListener(new Node3Listener());
 
         Node4 = new JButton("DOOR");
+        Node4.setBackground(NEO2);
         Node4.setBounds(0, 150, 90, 50);
         Node4.addActionListener(new Node4Listener());
 
@@ -74,12 +77,12 @@ public class EscapeRoom {
         Item3.setBounds(161, 425, 100, 35);
 
         Panel.add(Item1);
-
         Panel.add(Item3);
 
         Items.add(Item1);
         Items.add(Item2);
         Items.add(Item3);
+        Items.add(Item4);
 
         Panel.setLayout(null);
         Panel.setBackground(Color.white);
@@ -90,6 +93,12 @@ public class EscapeRoom {
         Panel.add(Node3);
         Window.add(Panel);
         Window.setVisible(true);
+        Panel.setBackground(Back);
+        label1.setForeground(Front);
+        descriptionBlock.setForeground(Front);
+        Item1.setBackground(offYellow);
+        Item2.setBackground(offYellow);
+        Item3.setBackground(offYellow);
 
     }
 
@@ -139,16 +148,26 @@ public class EscapeRoom {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             if (run == 3){
-            oneTimeJoke("Did you really think tou could escape so easily?");
+            oneTimeJoke("Did you really think you could escape so easily?");
+            descriptionBlock.setText("Mettaton NEO blocks the way!");
+            Node1.setText("Mettaton NEO");
+            Node1.setBackground(NEO);
+            Node1.setBounds(0, 0, 120, 50);
+            Panel.add(Node1);
+            Node2.setForeground(NEO);
+            Panel.setBackground(Front);
+
             } else {
                 if (Item1.isSelected()) {
-                    label1.setText("You gave YOURSELF the MICROPHONE, YOU are a silent protagonist.");
+                    label1.setText("You gave YOURSELF the MICROPHONE.");
+                    descriptionBlock.setText("YOU are a silent protagonist.");
                 } else if (Item2.isSelected()) {
                     if (item2) {
                         label1.setText("You gave YOURSELF the DRESS, YOU are now in a dress.");
                         item2 = false;
                         Panel.remove(Item2);
-                    } else if (!item1) {
+                        System.out.println("2");
+                    } else if (item3) {
                         label1.setText("What?");
                     }
                 } else if (Item3.isSelected()) {
@@ -156,12 +175,10 @@ public class EscapeRoom {
                         label1.setText("You stare at the CALCULATOR.");
                         descriptionBlock.setText("Why would you want to use a CALCULATOR?");
                     } else {
-                        descriptionBlock.setText("Solve it idiot.");
-                        item2 = true;
+                        descriptionBlock.setText("(Enjoy the fact there is no text wrapping here :)!)");
                         item3 = false;
                         oneTimeJoke("Given x=(-b+-√(b^2-4ac))/2a, with an X value of 0.0124, B value of 12 and C value of 51, what is a? (round to 4 decimal places");
                         Panel.remove(Item3);
-                        Panel.add(Item2);
                     }
                 } else {
                     label1.setText("Do you like playing with yourself?");
@@ -180,7 +197,7 @@ public class EscapeRoom {
                 descriptionBlock.setText("The audience is already loud enough!");
                 label1.setText("(Have you tried someone else?)");
                 if (!item1){
-                    label1.setText("The audience is confused! No one likes a broken MIC!");
+                    label1.setText("The audience is confused! No one likes an imaginary MIC!");
                     descriptionBlock.setText("(What did you think would happen?)");
                 }
             } else if (Item2.isSelected()){
@@ -224,25 +241,41 @@ public class EscapeRoom {
         Panel.add(textBlock);
         Panel.add(textButton);
         label1.setText(prompt);
+
         return textBlock.getText();
     }
     private static class textButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            String garbage = oneTimeJoke("Given x=(-b+-√(b^2-4ac))/2a, with an X value of 0.0124, B value of 12 and C value of 51, what is a? (round to 4 decimal places");
-            if(garbage.equals("e")) {
-                label1.setText("Why did you solve that?");
-                descriptionBlock.setText("From within the CALCULATOR is a DRESS! YOU toss the CALCULATOR");
-            } else if(garbage.equals(""))
-
-            {
-                label1.setText("YOU FAIL!");
-                descriptionBlock.setText("You broke the CALCULATOR by inputting nothing, inside was a DRESS!");
-            } else
-
-            {
-                label1.setText("YOU FAIL!");
-                descriptionBlock.setText("You broke the CALCULATOR by inputting garbage, inside was a DRESS!");
+            if (run != 3) {
+                String garbage = oneTimeJoke("Given x=(-b+-√(b^2-4ac))/2a, with an X value of 0.0124, B value of 12 and C value of 51, what is a? (round to 4 decimal places");
+                if (garbage.equals("e")) {
+                    label1.setText("Why did you solve that?");
+                    descriptionBlock.setText("From within the CALCULATOR is a DRESS! YOU toss the CALCULATOR");
+                    item2 = true;
+                    Panel.add(Item2);
+                } else if (garbage.equals("")) {
+                    label1.setText("YOU FAILED TO SUCCEED!");
+                    descriptionBlock.setText("You broke the CALCULATOR by inputting nothing, inside was a DRESS!");
+                    item2 = true;
+                    Panel.add(Item2);
+                } else {
+                    label1.setText("YOU FAIL!");
+                    descriptionBlock.setText("You broke the CALCULATOR by inputting garbage, inside was a DRESS!");
+                    item2 = true;
+                    Panel.add(Item2);
+                }
+            } else {
+                String garbage = oneTimeJoke("Time for a pop quiz hotshot! Who is my favorite person here?").toLowerCase();
+                if (garbage.equals("you") || garbage.equals("mettaton") || garbage.equals("mettaton neo")){
+                    label1.setText("Yes I am!");
+                } else if (garbage.equals("me")){
+                    label1.setText("No!");
+                } else if (garbage.equals("audience")){
+                    label1.setText("Them?");
+                } else {
+                    label1.setText("Who?");
+                }
             }
             Panel.remove(textBlock);
             Panel.remove(textButton);
@@ -252,10 +285,16 @@ public class EscapeRoom {
         private static class Node4Listener implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                //On the event any item is smuggled in by pressing the button twice, all items and buttons are cleared.
                 Panel.remove(Node1);
                 Panel.remove(Node3);
+                Panel.remove(Node4);
+                item1 = false;
+                item2 = false;
+                item3 = false;
+                item4 = false;
                 descriptionBlock.setText("The door is locked.");
-                label1.setText("...");
+                label1.setText("You attempt to exit.");
                 run = 3;
 
                 Panel.updateUI();
