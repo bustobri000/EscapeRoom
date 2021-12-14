@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Locale;
 
 
 public class EscapeRoom {
@@ -30,10 +29,10 @@ public class EscapeRoom {
     public static Color NEO2 = new Color(248, 248, 192);
 
     public static void main(String[] args) {
-        Window = new JFrame("UnfunnyUndertaleJoke12.exe.jpeg.png.gif  and Knuckles deluxe edition u featuring Dante from Devil May Cry Series and Knuckles 3D U and Knuckles and Knuckles and Knuckles and Knuckles and Knuckles and Knuckles and Knuckles and Knuckles and Knuckle sand Knuckle sand Knuckles and Knuckle sand Knuckle sand Knuckles week 7 Update ft sussus amogus");
+        Window = new JFrame("UnfunnyUndertaleJoke12.exe.jpeg.png.gif  and Knuckles deluxe edition u featuring Dante from Devil May Cry Series and Knuckles 3D U and Knuckles and Knuckles and Knuckles and Knuckles and Knuckle sand Knuckles week 7 Update ft sussus amogus");
 
         Window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Window.setSize(750, 500);
+        Window.setSize(750, 300);
 
         Panel = new JPanel();
         Panel.setBackground(Back);
@@ -61,20 +60,22 @@ public class EscapeRoom {
         textButton = new JButton("Submit");
         textButton.addActionListener(new textButtonListener());
         textBlock = new JTextField(10);
-        textBlock.setBounds(100, 100, 50, 50);
-        textButton.setBounds(200, 200, 50, 50);
+        textBlock.setBounds(100, 100, 75, 50);
+        textButton.setBounds(100, 151, 75, 50);
 
         label1 = new JLabel("Some weird dancing robot thing has taken you captive to make you a star! You must escape!");
-        label1.setBounds(100, 25, 550, 35);
+        label1.setBounds(100, 45, 550, 35);
         descriptionBlock = new JLabel("Are you going to do something or not?");
-        descriptionBlock.setBounds(100, 50, 550, 35);
+        descriptionBlock.setBounds(100, 70, 550, 35);
 
         Item1 = new JRadioButton("Microphone");
-        Item1.setBounds(0, 425, 100, 35);
+        Item1.setBounds(0, 225, 100, 35);
         Item2 = new JRadioButton("Dress");
-        Item2.setBounds(101, 425, 60, 35);
+        Item2.setBounds(101, 225, 60, 35);
         Item3 = new JRadioButton("Calculator");
-        Item3.setBounds(161, 425, 100, 35);
+        Item3.setBounds(161, 225, 100, 35);
+        Item4 = new JRadioButton("Pointed shards");
+        Item4.setBounds(121, 225, 120, 35);
 
         Panel.add(Item1);
         Panel.add(Item3);
@@ -131,6 +132,12 @@ public class EscapeRoom {
                 label1.setText("Mettaton slaps you elegantly.");
                 descriptionBlock.setText("(This message is a rare one!)");
                 }
+            } else if (run == 3) {
+                oneTimeJoke("Time for a pop quiz hotshot! Who is my favorite person here?");
+                run = 4;
+            } else if (run == 4 && Item1.isSelected()) {
+                label1.setText("Mettaton NEO slaps you elegantly.");
+                descriptionBlock.setText("(This message is very rare one!)");
             } else {
                 if (Item1.isSelected()){
                     label1.setText("Mettaton Already has a MICROPHONE! HE IS NOW DUAL WIELDING MICs!");
@@ -148,15 +155,39 @@ public class EscapeRoom {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             if (run == 3){
-            oneTimeJoke("Did you really think you could escape so easily?");
+            label1.setText("Did you really think you could escape so easily?");
             descriptionBlock.setText("Mettaton NEO blocks the way!");
             Node1.setText("Mettaton NEO");
+            Node4.setText("Elevator");
             Node1.setBackground(NEO);
+            Node4.setBackground(NEO);
             Node1.setBounds(0, 0, 120, 50);
             Panel.add(Node1);
             Node2.setForeground(NEO);
             Panel.setBackground(Front);
+            label1.setForeground(Back);
+            descriptionBlock.setForeground(Back);
 
+            } else if (run == 4){
+                if (Item1.isSelected()){
+                    Panel.remove(Node1);
+                    Panel.remove(Node2);
+                    Panel.remove(Node3);
+                    Panel.remove(Item1);
+                    Panel.remove(Item2);
+                    Panel.remove(Item3);
+                    Panel.remove(Item4);
+
+                    descriptionBlock.setText("Oh...");
+                    label1.setText("I guess that means you don't want to join ny fan club?");
+                    Panel.add(Node4);
+                } else {
+                    Panel.remove(Node2);
+                    descriptionBlock.setText("For some reason you suddenly feel like acting.");
+                    label1.setText("You smash the MIC into pieces");
+                    Panel.remove(Item1);
+                    Panel.add(Item4);
+                }
             } else {
                 if (Item1.isSelected()) {
                     label1.setText("You gave YOURSELF the MICROPHONE.");
@@ -266,16 +297,21 @@ public class EscapeRoom {
                     Panel.add(Item2);
                 }
             } else {
-                String garbage = oneTimeJoke("Time for a pop quiz hotshot! Who is my favorite person here?").toLowerCase();
+                String garbage = oneTimeJoke("Time for a pop quiz hotshot! Who is my favorite person here?");
                 if (garbage.equals("you") || garbage.equals("mettaton") || garbage.equals("mettaton neo")){
                     label1.setText("Yes I am!");
                 } else if (garbage.equals("me")){
                     label1.setText("No!");
-                } else if (garbage.equals("audience")){
+                } else if (garbage.equals("audience")) {
                     label1.setText("Them?");
+                } else if (garbage.length() > 15) {
+                    label1.setText("Go write a book or something!");
                 } else {
                     label1.setText("Who?");
                 }
+                descriptionBlock.setText("Mettaton drops a MIC in his confusion!");
+                Panel.add(Item1);
+                item1 = true;
             }
             Panel.remove(textBlock);
             Panel.remove(textButton);
@@ -285,19 +321,24 @@ public class EscapeRoom {
         private static class Node4Listener implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                //On the event any item is smuggled in by pressing the button twice, all items and buttons are cleared.
-                Panel.remove(Node1);
-                Panel.remove(Node3);
-                Panel.remove(Node4);
-                item1 = false;
-                item2 = false;
-                item3 = false;
-                item4 = false;
-                descriptionBlock.setText("The door is locked.");
-                label1.setText("You attempt to exit.");
-                run = 3;
+                if (run == 4){
+                    label1.setText("You enter the elavator");
+                    descriptionBlock.setText("You escaped.");
+                    Panel.remove(Node4);
+                } else {
+                    Panel.remove(Node1);
+                    Panel.remove(Node3);
+                    Panel.remove(Node4);
+                    item1 = false;
+                    item2 = false;
+                    item3 = false;
+                    item4 = false;
+                    descriptionBlock.setText("The door is locked.");
+                    label1.setText("You attempt to exit.");
+                    run = 3;
 
-                Panel.updateUI();
+                    Panel.updateUI();
+                }
             }
         }
 }
