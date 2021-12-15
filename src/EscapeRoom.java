@@ -149,7 +149,7 @@ public class EscapeRoom {
                     Panel.remove(Item4);
 
                     descriptionBlock.setText("Oh...");
-                    label1.setText("I guess that means you don't want to join ny fan club?");
+                    label1.setText("I guess that means you don't want to join my fan club?");
                     Panel.add(Node4);
                 }
             } else {
@@ -280,8 +280,9 @@ public class EscapeRoom {
     private static class textButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
+            String garbage;
             if (run == 1) {
-                String garbage = oneTimeJoke("Given x=(-b+-√(b^2-4ac))/2a, with an X value of 0.0124, B value of 12 and C value of 51, what is a? (round to 4 decimal places");
+                garbage = oneTimeJoke("Given x=(-b+-√(b^2-4ac))/2a, with an X value of 0.0124, B value of 12 and C value of 51, what is a? (round to 4 decimal places");
                 if (garbage.equals("e")) {
                     label1.setText("Why did you solve that?");
                     descriptionBlock.setText("From within the CALCULATOR is a DRESS! YOU toss the CALCULATOR");
@@ -299,19 +300,23 @@ public class EscapeRoom {
                     Panel.add(Item2);
                 }
             } else {
-                String garbage = oneTimeJoke("Time for a pop quiz hotshot! Who is my favorite person here?");
-                if (garbage.equals("you") || garbage.equals("mettaton") || garbage.equals("mettaton neo")){
+                garbage = oneTimeJoke("Time for a pop quiz hotshot! Who is my favorite person here?");
+                if (garbage.equals("you") || garbage.equals("mettaton") || garbage.equals("mettaton neo" ) || (garbage.equals("neo"))){
                     label1.setText("Yes I am!");
+                    descriptionBlock.setText("Mettaton drops a MIC in his distractedness!");
                 } else if (garbage.equals("me")){
                     label1.setText("No!");
+                    descriptionBlock.setText("Mettaton drops a MIC in his anger!");
                 } else if (garbage.equals("audience")) {
                     label1.setText("Them?");
+                    descriptionBlock.setText("Mettaton drops a MIC in his confusion!");
                 } else if (garbage.length() > 15) {
                     label1.setText("Go write a book or something!");
+                    descriptionBlock.setText("Mettaton drops a MIC in his mild annoyance!");
                 } else {
                     label1.setText("Who?");
+                    descriptionBlock.setText("Mettaton drops a MIC in his confusion!");
                 }
-                descriptionBlock.setText("Mettaton drops a MIC in his confusion!");
                 Panel.add(Item1);
                 item1 = true;
             }
@@ -324,8 +329,8 @@ public class EscapeRoom {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 if (run == 4){
-                    label1.setText("You enter the elavator");
-                    descriptionBlock.setText("You escaped.");
+                    label1.setText("You enter the elavator.");
+                    descriptionBlock.setText("You escaped!");
                     Panel.remove(Node4);
                     Panel.setBackground(Color.RED);
                 } else {
