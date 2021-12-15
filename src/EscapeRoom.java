@@ -138,6 +138,20 @@ public class EscapeRoom {
             } else if (run == 4 && Item1.isSelected()) {
                 label1.setText("Mettaton NEO slaps you elegantly.");
                 descriptionBlock.setText("(This message is very rare one!)");
+            } else if (Item4.isSelected()){
+                if (Item4.isSelected()){
+                    Panel.remove(Node1);
+                    Panel.remove(Node2);
+                    Panel.remove(Node3);
+                    Panel.remove(Item1);
+                    Panel.remove(Item2);
+                    Panel.remove(Item3);
+                    Panel.remove(Item4);
+
+                    descriptionBlock.setText("Oh...");
+                    label1.setText("I guess that means you don't want to join ny fan club?");
+                    Panel.add(Node4);
+                }
             } else {
                 if (Item1.isSelected()){
                     label1.setText("Mettaton Already has a MICROPHONE! HE IS NOW DUAL WIELDING MICs!");
@@ -169,19 +183,7 @@ public class EscapeRoom {
             descriptionBlock.setForeground(Back);
 
             } else if (run == 4){
-                if (Item1.isSelected()){
-                    Panel.remove(Node1);
-                    Panel.remove(Node2);
-                    Panel.remove(Node3);
-                    Panel.remove(Item1);
-                    Panel.remove(Item2);
-                    Panel.remove(Item3);
-                    Panel.remove(Item4);
-
-                    descriptionBlock.setText("Oh...");
-                    label1.setText("I guess that means you don't want to join ny fan club?");
-                    Panel.add(Node4);
-                } else {
+               if (Item1.isSelected() && item1) {
                     Panel.remove(Node2);
                     descriptionBlock.setText("For some reason you suddenly feel like acting.");
                     label1.setText("You smash the MIC into pieces");
@@ -278,7 +280,7 @@ public class EscapeRoom {
     private static class textButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            if (run != 3) {
+            if (run == 1) {
                 String garbage = oneTimeJoke("Given x=(-b+-√(b^2-4ac))/2a, with an X value of 0.0124, B value of 12 and C value of 51, what is a? (round to 4 decimal places");
                 if (garbage.equals("e")) {
                     label1.setText("Why did you solve that?");
@@ -325,6 +327,7 @@ public class EscapeRoom {
                     label1.setText("You enter the elavator");
                     descriptionBlock.setText("You escaped.");
                     Panel.remove(Node4);
+                    Panel.setBackground(Color.RED);
                 } else {
                     Panel.remove(Node1);
                     Panel.remove(Node3);
@@ -337,8 +340,8 @@ public class EscapeRoom {
                     label1.setText("You attempt to exit.");
                     run = 3;
 
-                    Panel.updateUI();
                 }
+                Panel.updateUI();
             }
         }
 }
